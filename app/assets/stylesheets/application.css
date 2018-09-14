@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+.mr-auto, .mx-auto {
+    margin: auto !important;
+    margin-left: 0 !important;
+}
+
+.navbar-nav {
+    flex-direction: row;
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .navbar-collapse.collapse {
+        display: flex !important;
+        flex-basis: auto !important;
+    }
+}
+
+

@@ -1,0 +1,45 @@
+<%= form_for(@stock, html: {class: "form-horizontal", role: "form"}) do |f| %>
+  <% if @stock.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h4>
+
+      <ul>
+        <% @stock.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control", required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :unit_price, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :unit_price, class: "form-control", min: "0" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :interest, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :interest, class: "form-control", min: "0" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :duration, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :duration, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

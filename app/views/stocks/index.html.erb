@@ -1,0 +1,37 @@
+<div class="page-header">
+  <%= link_to new_stock_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Stock
+  <% end %>
+  <h1>Listing stocks</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Unit price</th>
+      <th>Interest</th>
+      <th>Duration</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= link_to stock.name, stock %></td>
+        <td><%= humanized_money_with_symbol stock.unit_price %></td>
+        <td><%= stock.interest %></td>
+        <td><%= stock.duration %></td>
+        <td><%= link_to 'Show', stock %></td>
+        <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
+        <td><%= link_to 'Destroy', stock, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
