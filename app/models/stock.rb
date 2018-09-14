@@ -2,6 +2,7 @@ class Stock < ApplicationRecord
   validates_presence_of :name, :interest, :duration, :unit_price
   validates_numericality_of :interest, :unit_price, greater_than: 0
   validates_numericality_of :duration, greater_than_or_equal_to: 1
+
   belongs_to :user
   monetize :unit_price_cents
 

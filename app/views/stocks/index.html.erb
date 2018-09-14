@@ -21,15 +21,21 @@
     </thead>
 
     <tbody>
-    <% @stocks.each do |stock| %>
+    <% if @stocks.size > 0 %>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <td><%= link_to stock.name, stock %></td>
+          <td><%= humanized_money_with_symbol stock.unit_price %></td>
+          <td><%= stock.interest %></td>
+          <td><%= stock.duration %></td>
+          <td><%= link_to 'Show', stock %></td>
+          <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
+          <td><%= link_to 'Destroy', stock, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= link_to stock.name, stock %></td>
-        <td><%= humanized_money_with_symbol stock.unit_price %></td>
-        <td><%= stock.interest %></td>
-        <td><%= stock.duration %></td>
-        <td><%= link_to 'Show', stock %></td>
-        <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
-        <td><%= link_to 'Destroy', stock, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td class="text-center" colspan="7">No data yet...</td>
       </tr>
     <% end %>
     </tbody>

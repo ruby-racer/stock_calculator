@@ -1,0 +1,15 @@
+<% content_for :not_authorized do %>
+  <ul class="nav navbar-nav mr-auto"></ul>
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'Sign In', new_user_session_path %></li>
+  </ul>
+<% end %>
+<% content_for :authorized do %>
+  <ul class="nav navbar-nav mr-auto">
+    <li class="nav-item"><%= link_to 'Add Stock', new_stock_path %></li>
+    <li class="nav-item"><%= link_to "Stocks", stocks_path %></li>
+  </ul>
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+  </ul>
+<% end %>

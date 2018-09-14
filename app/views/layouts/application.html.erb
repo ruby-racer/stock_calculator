@@ -28,38 +28,16 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to "Stock calculator", root_path, class: "navbar-brand" %>
-      <% content_for :not_authorized do %>
-        <ul class="nav navbar-nav mr-auto"></ul>
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        </ul>
-      <% end %>
-      <% content_for :authorized do %>
-        <ul class="nav navbar-nav mr-auto">
-          <li class="nav-item"><%= link_to 'Add Stock', new_stock_path %></li>
-          <li class="nav-item"><%= link_to "Stocks", stocks_path %></li>
-        </ul>
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        </ul>
-      <% end %>
     </div>
     <div id="navbar" class="collapse navbar-collapse justify-content-between">
-      <%= yield :not_authorized if current_user.nil? %>
-      <%= yield :authorized if current_user.present? %>
+      <%= render partial: 'layouts/navigation' %>
+      <%= current_user.nil? ? yield(:not_authorized) : yield(:authorized) %>
     </div>
   </div>
 </nav>
 <div class="container">
-  <% flash.each do |name, msg| %>
-    <%= content_tag :div, class: "alert alert-#{ name == "alert" ? "danger" : "success" } alert-dismissable", role: "alert" do %>
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <%= msg %>
-    <% end %>
-  <% end %>
-
-    <%= yield %>
+  <%= render partial: 'layouts/flash' %>
+  <%= yield %>
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_stock, only: [:show, :edit, :update, :destroy]
+  before_action :set_stock, only: %i[show edit update destroy]
 
   # GET /stocks
   # GET /stocks.json
@@ -22,17 +22,16 @@ class StocksController < ApplicationController
   end
 
   # GET /stocks/1/edit
-  def edit
+  def edit;
   end
 
   # POST /stocks
   # POST /stocks.json
   def create
-    @stock = Stock.new(stock_params)
-    @stock.user = current_user
+    @stock = current_user.stocks.new(stock_params)
     respond_to do |format|
       if @stock.save
-        format.html {redirect_to @stock, notice: 'Stock was successfully created.'}
+        format.html {redirect_to root_path, notice: 'Stock was successfully created.'}
         format.json {render :show, status: :created, location: @stock}
       else
         format.html {render :new}
@@ -69,7 +68,7 @@ class StocksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_stock
-    @stock = Stock.find(params[:id])
+    @stock = current_user.stocks.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
